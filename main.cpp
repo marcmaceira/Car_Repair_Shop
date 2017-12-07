@@ -2,12 +2,18 @@
 #include <cstdlib>
 #include <cctype>
 #include "Shop.h"
+#include "Service.h"
 using namespace std;
 
 void MainMenu();
-Shop *TheServices = new Shop[100];
+void menuSelector(char);
+void createNewService();
+
+Service *TheServices = new Service[100];
+int i = 0;
 
 int main(){
+  
   MainMenu();
 
   delete[] TheServices;
@@ -19,47 +25,29 @@ void MainMenu()
 {
   char option;
   do {
-    cout << "===================================" << endl;
-    cout << "Menu" << endl;
-    cout << "1 - Enter a new service" << endl;
-    cout << "2 - Manage services" << endl;
-    cout << "3 - Enter a customer service order" << endl;
-    cout << "4 - Print/Export all service items" << endl;
-    cout << "5 - About this program" << endl;
-    cout << "E - Exit" << endl;
-    cout << "===================================" << endl << endl;
-
-    cout << "Choose an option: ";
+    cout << "MENU" << endl
+      << "1 - Enter a new service" << endl
+      << "2 - Manage services" << endl
+      << "3 - Enter a customer service order" << endl
+      << "4 - Print/Export all service items" << endl
+      << "5 - About" << endl
+      << "E - Exit" << endl << endl
+      << "Choose an option: ";
     cin >> option;
-    switch (option) {
+
+    menuSelector(option);
+
+  } while(option == '1' || option == '2' ||option== '3' || option== '4' || option == '5' || option =='E' || option=='e');
+}
+
+void menuSelector(char selection) {
+switch (selection) {
       // Adds a new service to the offered services list
       case '1':
       {
-        string service;
-        double prices;
-        Shop shopper;
-        cin.ignore();
-        cout << "Enter the new service: ";
-        getline(cin,service);
-        cout << "Enter the price: $";
-        cin >> prices;
-        cout << endl;
-
-        shopper.setPrice(prices);
-        shopper.setService(service);
-
-        // <-- PRUEBA
-        int i = 0;
-        TheServices[0] = shopper;
-        // -->
-
-        cout << shopper;
-
-        system("PAUSE");
-        system("CLS");
+        
         break;
       }
-
 
       case '2':
         system("PAUSE");
@@ -89,6 +77,39 @@ void MainMenu()
         system("PAUSE");
         system("CLS");
     }
+}
 
-  } while(option == '1' || option == '2' ||option== '3' || option== '4' || option == '5' || option =='E' || option=='e');
+void createNewService() {
+  string service;
+  string location;  
+  double prices;
+  Service theService;
+
+  cin.ignore();
+  cout << "Enter the new service: ";
+  getline(cin,service);
+
+  cout << "Enter the price: $";
+  cin >> prices;
+  
+  cin.ignore();
+  cout << "Enter the location: ";
+  getline(cin,location);
+  cout << endl;
+
+  theService.setLocation(location);
+  theService.setPrice(prices);
+  theService.setService(service);
+
+  theService.createServiceDB();
+  // <-- PRUEBA
+  TheServices[i] = theService;
+  // -->
+
+  cout << theService;
+
+  i++; // Move on to the next order
+
+  system("PAUSE");
+  system("CLS");
 }

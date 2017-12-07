@@ -7,14 +7,17 @@ using namespace std;
 
 class Shop
 {
-private:
+protected:
   double price;
   string service;
+  string location;
 
 public:
   Shop();
   Shop(double, string);
   ~Shop();
+  void setLocation(string loc);
+  string getLocation() const;
   void setPrice(double);
   double getPrice() const;
   void setService(string);

@@ -17,6 +17,17 @@ Shop::~Shop()
 
 };
 
+void Shop::setLocation(string loc)
+{
+    location = loc;
+}
+
+
+string Shop::getLocation() const
+{
+  return location;
+}
+
 void Shop::setPrice(double aPrice)
 {
   price = aPrice;
