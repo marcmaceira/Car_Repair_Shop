@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "Shop.h"
+#include "Customer.h"
 
 Order::Order()
 { theOrder = " "; }
@@ -13,36 +13,37 @@ Order::Order(string theOr)
 Order::~Order()
 { }
 
-void Order::setTheOrder(string theOr)
-{ theOrder = theOr;}
-
-string Order::getTheOrder() const
-{ return theOrder; }
+// void Order::setTheOrder(string theOr)
+// { theOrder = theOr; }
+//
+// string Order::getTheOrder() const
+// { return theOrder; }
 
 void Order::createReceipt(int j)
 {
-    string service = getService();
-  	double Theprice = getPrice();
-  	string Thelocation = getLocation();
-  	string order = theOrder;
+    // string Thelocation = getLocation();
+    // string service = getService();
+  	// double Theprice = getPrice();
+  	// string order = theOrder;
+
   	ofstream myfile;
-  	myfile.open("WritingObjectFile.txt", ios::app);
-  	//while (int j == 0)
-  	  myfile << order << ", " << service << ", " << Theprice << ", " << Thelocation << endl;
+  	myfile.open("Receipts.txt", ios::app);
+  	//while (j == 0)
+  	  myfile << getName() << ", " << getService() << ", " << getPrice() << ", " << getLocation() << endl;
   	myfile.close();
 }
 
 void Order::readReceipt()
 {
   string line;
-	ifstream multiLineFile("WritingObjectFile.txt");
+	ifstream multiLineFile("Receipts.txt");
 
   if (multiLineFile.is_open())
   {//verify open file
     while (!multiLineFile.eof())
     {//while the file is not at the end
       getline(multiLineFile, line); //retrieve each line
-      if (line != "")
+      if (line != " ")
       { // it is not at the end of file
         cout << line << endl;
       }

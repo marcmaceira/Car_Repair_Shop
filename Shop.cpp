@@ -1,5 +1,6 @@
 #include "Shop.h"
-
+#include <string>
+#include "NegativeNum.h"
 Shop::Shop()
 {
   service = "";
@@ -30,7 +31,14 @@ string Shop::getLocation() const
 
 void Shop::setPrice(double aPrice)
 {
-  price = aPrice;
+if(aPrice>= 0.0)
+   {
+    price = aPrice;
+  }
+  else
+  {
+    throw NegativeNum(aPrice);
+  }
 };
 
 double Shop::getPrice() const

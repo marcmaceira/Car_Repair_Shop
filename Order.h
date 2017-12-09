@@ -2,11 +2,11 @@
 #define Order_h
 #include <iostream>
 #include <string>
-#include "Shop.h"
+#include "Customer.h"
 using namespace std;
 
-class Order : public Shop {
-private:
+class Order : public Customer {
+protected:
   string theOrder;
 public:
   Order();

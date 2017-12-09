@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include "NegativeNum.h"
 using namespace std;
 
 class Shop
@@ -27,7 +28,3 @@ public:
 };
 
 #endif
-
-/*
-
-*/

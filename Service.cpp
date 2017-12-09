@@ -43,6 +43,7 @@ void Service::createServiceDB() {
 }
 
 void Service::showServiceDB() {
+  cout << "Service\tPrice\tLocation" << endl;
   ifstream myfile("Service.csv");
 	string value;
 	while (myfile.good())//validate file exists
