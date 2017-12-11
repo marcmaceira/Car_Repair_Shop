@@ -70,3 +70,9 @@ ostream &operator<<(ostream&output,const Shop&aShop)
   output << endl;
   return output;
 };
+
+
+/*Shop Shop::operator + (const Shop &aShop)
+{
+
+}*/

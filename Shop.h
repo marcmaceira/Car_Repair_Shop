@@ -24,6 +24,7 @@ public:
   void setService(string);
   string getService() const;
   void Show();
+  Shop operator+(Shop&);
   friend ostream &operator<<(ostream&output,const Shop&);
 };
 

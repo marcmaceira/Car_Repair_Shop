@@ -1,8 +1,9 @@
-#include "Order.h"
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "Order.h"
 #include "Customer.h"
+#include "Date.h"
 
 Order::Order()
 { theOrder = " "; }
@@ -13,30 +14,20 @@ Order::Order(string theOr)
 Order::~Order()
 { }
 
-// void Order::setTheOrder(string theOr)
-// { theOrder = theOr; }
-//
-// string Order::getTheOrder() const
-// { return theOrder; }
-
-void Order::createReceipt(int j)
+void Order::createReceipt()
 {
-    // string Thelocation = getLocation();
-    // string service = getService();
-  	// double Theprice = getPrice();
-  	// string order = theOrder;
-
   	ofstream myfile;
-  	myfile.open("Receipts.txt", ios::app);
-  	//while (j == 0)
-  	  myfile << getName() << ", " << getService() << ", " << getPrice() << ", " << getLocation() << endl;
+    string path = "Receipts\\" + getName() + ".txt";
+  	myfile.open(path, ios::app);
+  	myfile << getService() << ", $" << getPrice() << ", " << getLocation() << ", " << getTheDate() << endl;
   	myfile.close();
 }
 
 void Order::readReceipt()
 {
   string line;
-	ifstream multiLineFile("Receipts.txt");
+  string receipt = "Receipts\\" + getName() + ".txt";
+	ifstream multiLineFile(receipt);
 
   if (multiLineFile.is_open())
   {//verify open file
@@ -50,3 +41,49 @@ void Order::readReceipt()
     }
   }
 }
+
+void Order::createReceiptDB()
+{
+  int offset;
+  ifstream Myfile;
+  string line;
+
+  Myfile.open("Receipts.csv", ios::app);
+  if (Myfile.is_open())
+  {
+    while (Myfile.good())
+    {
+      getline(Myfile, line, ',');
+      if (!((offset = line.find(getName(), 0)) != string::npos))
+      {
+        ofstream myfile;
+        myfile.open("Receipts.csv", ios::app);
+        myfile << getName() << endl;
+        myfile.close();
+      }
+      else
+      {
+        cout << getName() << " already exists in the database" << endl;
+      }
+    }
+    Myfile.close();
+  }
+  system("PAUSE");
+}
+
+void Order::readReceiptDB()
+{
+  ifstream myfile("Receipts.csv");
+	string value;
+	while (myfile.good())//validate file exists
+	{
+		getline(myfile, value, '\n'); // read a string until next comma
+		cout << string(value) << endl; // display value and add tab for better display
+	}
+}
+
+void Order::setCreationDate(int month, int day, int year)
+{ theDate.setDate(month, day, year); }
+
+string Order::getTheDate() const
+{ return theDate.getDate(); }
